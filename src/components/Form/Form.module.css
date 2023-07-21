@@ -1,0 +1,12 @@
+.container_Form{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 625px;
+    background-image: url(https://cutewallpaper.org/22/rick-and-morty-ps4-wallpapers/2403713854.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+

@@ -1,0 +1,17 @@
+.containerNav{
+    background-color: rgb(31, 31, 58);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-evenly
+}
+
+.links{
+    text-decoration: none;
+    color: #fff;
+}
+.links:hover{
+    color: yellow;
+}
