@@ -8,15 +8,11 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
         case ADD_FAV:
-           return{
-            ...state, myFavorites:[...state.allCharacters , action.payload],
-            allCharacters:[...state.allCharacters , action.payload]
-           }
+            return{...state, myFavorites: action.payload,
+            allCharacters: action.payload};
         break;
         case REMOVE_FAV:
-            const newRemove = state.allCharacters.filter((char)=> char.id !== action.payload)
-            return{...state, myFavorites: newRemove,
-            allCharacters: newRemove}
+            return{...state, myFavorites: action.payload};
         break;
         case FILTER:
             const newFilter = state.allCharacters.filter((char)=> char.gender === action.payload)
@@ -26,7 +22,7 @@ const rootReducer = (state = initialState, action) => {
             return{...state, myFavorites: [...state.allCharacters]}
         break;
         case ORDER:
-            const newOrder = state.allCharacters.sort((a,b)=>{
+            const newOrder = [...state.allCharacters].sort((a,b)=>{
                 if(a.id > b.id){
                     return "Ascendente" === action.payload ? 1 : -1;
                 }

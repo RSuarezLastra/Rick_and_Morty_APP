@@ -1,32 +1,26 @@
-var http = require("http");
-const getCharById = require("./controllers/getChartById");
+const express = require('express')
+const server = express();
+const router = require('./routes/index')
+const PORT = 3001;
 
+server.use(express.json())
 
-http.createServer((req, res)=> {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+server.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header(
+       'Access-Control-Allow-Headers',
+       'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header(
+       'Access-Control-Allow-Methods',
+       'GET, POST, OPTIONS, PUT, DELETE'
+    );
+    next();
+});
 
-    const {url} = req
-    const id = url.split('/').at(-1);
-   
-    if(url.includes("/rickandmorty/character")){
-        getCharById(res,id)
-    }
+server.use("/rickandmorty", router)
 
-}).listen(3001);
-
-
-
-
-// if(url.includes("/rickandmorty/character")){
-//     const id = url.split('/').at(-1);
-
-//     const charData = data.find((char) => char.id === Number(id));
-
-//     if(charData){
-//       res.writeHead(200 , {"Content-type": "application/json"})
-//       res.end(JSON.stringify(charData))  
-//     } else{
-//         res.writeHead(404 , {"Content-type": "application/json"})
-//         res.end(JSON.stringify({error: "Character not found"}))  
-//     }
-// }
+server.listen(PORT, ()=>{
+    console.log('server escuchando en el puerto:' + PORT)
+});

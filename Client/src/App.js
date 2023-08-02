@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes ,useLocation, useNavigate} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { username, password, url } from './utils/const';
+import { url } from './utils/const';
 import axios from 'axios'
 import {Cards, Nav, About, Detail, Form, Favorites} from './components/index'
 
@@ -11,7 +11,7 @@ function App() {
    const [access, setAccess] = useState(false);
    const {pathname} = useLocation();
    const navigate = useNavigate();
-
+   
     useEffect(()=>{
       !access && navigate('/');
     },[access])
@@ -30,14 +30,16 @@ function App() {
          setCharacters(characters.filter((char) => char.id !== id)
       )}
 
-   const login = (userData)=>{
-      if(userData.username === username && userData.password === password){
-         setAccess(true);
-         navigate('/home');
-      }else{
-         alert('Credenciales incorrectas')
-      }
-   }
+const login = (userData) => {
+         const { username, password } = userData;
+         const URL = 'http://localhost:3001/rickandmorty/login/';
+         axios(URL + `?email=${username}&password=${password}`).then(({ data }) => {
+            const { access } = data;
+            setAccess(data);
+            access && navigate('/home');
+         });
+}
+      
 //******RENDER *******/
    return (
       <div className='App'>
@@ -55,7 +57,6 @@ function App() {
       </div>
    );
 
-  
 }
 
 export default App;
