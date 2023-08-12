@@ -12,9 +12,9 @@ function App() {
    const {pathname} = useLocation();
    const navigate = useNavigate();
    
-    useEffect(()=>{
+   useEffect(()=>{
       !access && navigate('/');
-    },[access])
+   },[access])
 
    //! FUNCIONES **************************
 

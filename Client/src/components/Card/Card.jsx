@@ -18,6 +18,7 @@ function Card({id,name,status,species,gender,image,onClose, addFav, removeFav, m
 
    const handleFavorite = () => {
       if(isFav){
+         
          setIsFav(false);
          removeFav(id)
       }else{
@@ -29,7 +30,7 @@ function Card({id,name,status,species,gender,image,onClose, addFav, removeFav, m
    return (
       <div className={style.container}>
          <div className={style.botones}>
-          {
+         {
          isFav ? 
             (<button className={style.fav_button} onClick={handleFavorite}>❤️</button>) 
             : (<button className={style.fav_button} onClick={handleFavorite}>🤍</button>)
